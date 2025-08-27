@@ -196,7 +196,7 @@ public partial class MainPage : ContentPage
 
 	private async Task Error(string reason, VerticalStackLayout stack, bool kasvisruokalista = false)
 	{
-		await App.Current.MainPage.DisplayAlert("Virhe", reason, "OK");
+		await DisplayAlert("Virhe", reason, "OK");
 
 		if (!kasvisruokalista)
 		{
@@ -241,7 +241,7 @@ public partial class MainPage : ContentPage
 	}
 
 
-	private void Render(Ruokalista? ruoka, bool seuraavaViikko, VerticalStackLayout stack, bool kasvisruokalista = false)
+	private void Render(Ruokalista ruoka, bool seuraavaViikko, VerticalStackLayout stack, bool kasvisruokalista = false)
 	{
 		var lista = new List<Day>();
 

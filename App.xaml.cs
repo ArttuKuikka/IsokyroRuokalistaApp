@@ -10,6 +10,7 @@ public partial class App : Application
 {
 	public App()
 	{
+
 		//branded app static values setup
 		Preferences.Default.Set("School", "https://isokyro.kouluruokalista.fi");
 		Preferences.Default.Set("PrimaryColor", Config.PrimaryFallbackColor);
@@ -20,6 +21,7 @@ public partial class App : Application
 		FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
 		FirebaseMessaging.Instance.SubscribeToTopic("isokyro.kouluruokalista.fi"); //format: isokyro.kouluruokalista.fi
 #endif
+
 
 
 
@@ -42,6 +44,7 @@ public partial class App : Application
 
 
 		InitializeComponent();
+		
 
 		if(Preferences.Get("SetupDone", false))
 		{
@@ -59,6 +62,8 @@ public partial class App : Application
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
 			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
+
+		
 
 	}
 
