@@ -28,27 +28,34 @@ namespace RuokalistaApp.Platforms.Android.Services
             Preferences.Set("DeviceToken", token);
         }
 
-        public override void OnMessageReceived(RemoteMessage message)
-        {
-            base.OnMessageReceived(message);
-            var notification = message.GetNotification();
+		public override void OnMessageReceived(RemoteMessage message)
+		{
+			base.OnMessageReceived(message);
+			var notification = message.GetNotification();
 
-            SendNotification(notification.Body, notification.Title, message.Data, notification.ChannelId);
-        }
+			if (notification != null)
+			{
+				SendNotification(notification.Body, notification.Title, message.Data, notification.ChannelId);
+			}
+		}
 
-        private void SendNotification(string messageBody, string title, IDictionary<string, string> data, string channel)
-        {
+		private void SendNotification(string messageBody, string title, IDictionary<string, string> data, string channel)
+		{
+			if (string.IsNullOrEmpty(channel))
+			{
+				channel = "Yleiset";
+			}
 
-            var notificationbuilder = new NotificationCompat.Builder(this, channel)
-                .SetContentTitle(title)
-                .SetContentTitle(messageBody)
-                .SetChannelId(channel)
-                .SetSubText(channel)
+			var notificationbuilder = new NotificationCompat.Builder(this, channel)
+				.SetContentTitle(title)
+				.SetContentText(messageBody)
+				.SetChannelId(channel)
+				.SetSubText(channel)
 				.SetSmallIcon(Resource.Drawable.logo);
 
-            var notificationmanager = NotificationManager.FromContext(this);
-            notificationmanager.Notify(Random.Shared.Next(0, 100), notificationbuilder.Build());
-        }
+			var notificationmanager = NotificationManager.FromContext(this);
+			notificationmanager.Notify(Random.Shared.Next(0, 100), notificationbuilder.Build());
+		}
 
     }
 
