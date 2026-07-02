@@ -1,2 +1,3 @@
 Add Ruokalista.keystore to file root
 Add google-services.json to file root
+set android manifest version
